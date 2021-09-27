@@ -18,6 +18,7 @@ reports
 .project
 .classpath
 .settings
+.factorypath
 
 #gedit
 *.*~

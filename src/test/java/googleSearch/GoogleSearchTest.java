@@ -27,10 +27,11 @@ public class GoogleSearchTest extends BrowserManager {
 	}
 
 	@Test
-	void validateSearchResults() {
+	void validateSearchResults() throws InterruptedException {
 		Objects objects = new Objects(driver);
 		objects.searchBar().click();
 		objects.searchBar().sendKeys("Touring motorcycles" + Keys.ENTER);
+		Thread.sleep(2000);
 		Assertions.assertTrue(objects.resultStats().isDisplayed());
 	}
 
