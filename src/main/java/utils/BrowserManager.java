@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.IOException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,7 +14,7 @@ public class BrowserManager {
 
 	public WebDriver initializeDriver() throws IOException {
 
-		String browserName = System.getProperty("Browser", "Chrome");
+		String browserName = System.getProperty("Browser");
 
 		if (browserName.equals("Chrome")) {
 			WebDriverManager.chromedriver().setup();
