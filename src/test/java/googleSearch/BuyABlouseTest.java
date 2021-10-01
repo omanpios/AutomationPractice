@@ -39,8 +39,8 @@ public class BuyABlouseTest extends BrowserManager {
     void buyABlouseTest() throws InterruptedException, IOException {
         FileInputStream fis = new FileInputStream("src/main/java/utils/data.properties");
         prop.load(fis);
-        String email = prop.getProperty("email");
-        String password = prop.getProperty("pass");
+        String email = System.getenv("email");
+        String password = System.getenv("password");
         WebDriverWait wait = new WebDriverWait(driver, 5000);
         Actions actions = new Actions(driver);
 
@@ -50,10 +50,8 @@ public class BuyABlouseTest extends BrowserManager {
         WebElement blousesButton = driver.findElement(By.linkText("Blouses"));
         blousesButton.click();
         Thread.sleep(4000);
-       
         WebElement productContainer = driver.findElement(By.className("product-container"));
         actions.moveToElement(productContainer);
-        
         WebElement addToCartButton = driver.findElement(By.xpath("//span[contains(text(),'Add to cart')]"));
         addToCartButton.click();
         WebElement proceedToCheckOutButton = driver.findElement(By
@@ -61,11 +59,11 @@ public class BuyABlouseTest extends BrowserManager {
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckOutButton));
         proceedToCheckOutButton.click();
         Thread.sleep(2000);
-
         WebElement checkoutButton = driver.findElement(By.partialLinkText("Proceed to checkout"));
         checkoutButton.click();
         WebElement emailField = driver.findElement(By.id("email"));
         emailField.click();
+        System.out.println(email);
         emailField.sendKeys(email);
         WebElement passwordField = driver.findElement(By.id("passwd"));
         passwordField.click();
@@ -80,7 +78,6 @@ public class BuyABlouseTest extends BrowserManager {
         WebElement processCarrier = driver.findElement(By.name("processCarrier"));
         processCarrier.click();
         Thread.sleep(1000);
-
         WebElement bankwireButton = driver.findElement(By.xpath("/html/body/div/div[2]/div/div[3]/div/div/div[3]/div[1]/div/p/a"));
         bankwireButton.click();
         Thread.sleep(2000);
