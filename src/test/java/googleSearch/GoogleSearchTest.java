@@ -6,22 +6,33 @@ import java.util.Properties;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
-import pageObjects.Objects;
+import page.Objects;
 import utils.BrowserManager;
 
-public class GoogleSearchTest extends BrowserManager {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
+public class GoogleSearchTest {
 	Properties prop = new Properties();
+	private WebDriver driver;
+	private BrowserManager browserManager = new BrowserManager();
+
+	@BeforeAll
+	void setUp() throws Exception {
+		driver = browserManager.initializeDriver();
+	}
 
 	@BeforeEach
 	void openBrowser() throws IOException, InterruptedException {
 		FileInputStream fis = new FileInputStream("src/main/java/utils/data.properties");
 		prop.load(fis);
 		String baseURL = prop.getProperty("BaseURL");
-		driver = initializeDriver();
 		driver.get(baseURL);
 		Thread.sleep(1000);
 	}
